@@ -1,9 +1,9 @@
-const sequelize = require('../config/connection');
 const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-class Map extends Model { }
+class Grid extends Model { }
 
-Map.init(
+Grid.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -12,14 +12,26 @@ Map.init(
             autoIncrement: true,
         },
         //name this column whatever you want
-        name: {
+        map_id: {
             //this is the type of data that will be stored in this column
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             //each time a row of data is inserted, this column will need to have a value
             allowNull: false,
+            references: {
+                model: 'map',
+                key: 'id'
+            }
         },
-        map: {
-            type: DataTypes.TEXT,
+        row: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        col: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        value: {
+            type: DataTypes.BOOLEAN,
             allowNull: false
         }
     },
@@ -28,8 +40,8 @@ Map.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'map',
+        modelName: 'grid',
     }
 );
 
-module.exports = Map;
+module.exports = Grid;

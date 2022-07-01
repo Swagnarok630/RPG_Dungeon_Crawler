@@ -28,9 +28,11 @@
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.21.1"
+    "namor": "^2.0.3",
+    "sequelize": "^6.19.0"
   },
   "devDependencies": {
+    "dungeon-generator": "^0.0.1",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "nodemon": "^2.0.18",

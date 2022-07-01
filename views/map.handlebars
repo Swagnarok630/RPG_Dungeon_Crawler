@@ -1,0 +1,25 @@
+<style>
+    .row {
+        display: flex;
+    }
+    .square {
+        height: 10px;
+        width: 10px;
+        border: solid 2px black;
+    }
+
+    .square.solid {
+        background: red;
+    }
+</style>
+{{#each row}}
+<div class="row">
+    {{#each cols as |col|}}
+        {{#if col}}
+            <span class="square solid"></span>
+        {{else}}
+            <span class="square"></span>
+        {{/if}}
+    {{/each}}
+</div>
+{{/each}}

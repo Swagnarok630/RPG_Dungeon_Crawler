@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS your_db_name;
-CREATE DATABASE your_db_name;

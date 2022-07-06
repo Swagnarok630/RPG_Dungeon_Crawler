@@ -1,0 +1,15 @@
+[
+    {
+      "potion": "Health Potion",
+      "description": "Restores 15 hit points upon use"
+    },
+    {
+      "potion": "Mana Potion",
+      "description": "Restores 15 mana points upon use"
+    },
+    {
+      "potion": "Double Potion",
+      "description": "Restores 15 hit points and 15 mana points upon use"
+    }
+]
+

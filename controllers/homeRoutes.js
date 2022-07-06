@@ -7,9 +7,9 @@ router.get('/', (req, res) => {
   res.render('home');
 });
 
-router.get('/otherpage', (req, res) => {
+router.get('/login', (req, res) => {
   //this will render the view otherpage.handlebars
-  res.render('otherpage');
+  res.render('login');
 });
 
 router.get("/game", async (req, res) => {

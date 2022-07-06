@@ -1,11 +1,16 @@
 //the MODEL of the MVC, define all data logic and relations here
+// TODO: Cleanup and refactor
 
 //import the example model
+const Chars = require('./Chars')
 const Col = require('./Col');
-const Example = require('./Example');
-const Row = require('./Row');
 const Grid = require("./Grid");
+const Items = require('./Items')
 const Map = require("./Map");
+const Row = require('./Row');
+const Skills = require('./Skills')
+const Users = require('./Users')
+
 
 // Map.hasMany(Col, {
 //     foreignKey: 'map_id'
@@ -30,4 +35,4 @@ Grid.belongsTo(Map, {
 })
 
 
-module.exports = { Example, Map, Grid };
+module.exports = { Chars, Grid, Items, Map, Skills, Users };

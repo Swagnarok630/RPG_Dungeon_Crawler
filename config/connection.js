@@ -1,11 +1,7 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
-
+console.log("env", process.env.DB_NAME)
 let sequelize;
-
-// console.log(process.env.DB_NAME)
-// console.log(process.env.DB_USER)
-// console.log(process.env.DB_PASSWORD)
 
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);

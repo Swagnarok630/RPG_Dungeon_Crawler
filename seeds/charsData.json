@@ -1,0 +1,23 @@
+[
+    {
+      "job_class": "Warrior",
+      "description": "A mighty and sturdy class with high raw strength and hit points",
+      "hitpoints": 35,
+      "manapoints": 20,
+      "strength": 6
+    },
+    {
+      "job_class": "Mage",
+      "description": "A sorcerer of the dark arts with high mana points for spell casting",
+      "hitpoints": 20,
+      "manapoints": 30,
+      "strength": 4
+    },
+    {
+      "job_class": "Cleric",
+      "description": "A devout lacking pure strength but can heal themselves to endure hardship",
+      "hitpoints": 25,
+      "manapoints": 20,
+      "strength": 5
+    }
+]

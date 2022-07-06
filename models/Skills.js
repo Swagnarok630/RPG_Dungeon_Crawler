@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Items extends Model { }
+class Skills extends Model { }
 
-Items.init(
+Skills.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,15 +11,19 @@ Items.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        potion: {
+        skill_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         description: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        mpcost: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         }
-        // TODO: Create/Search for potion images to use. Maybe red for HP, blue for MP, and purple for both
+        // TODO: Create/Search for skill icon images to use. Maybe a sword/staff for attack, a slash for double attack, a fireball for fireball, and healing star for cure
         // filename: {
         //     type: DataTypes.STRING,
         //     allowNull: false,
@@ -30,8 +34,8 @@ Items.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'items',
+        modelName: 'skills',
     }
 );
 
-module.exports = Items;
+module.exports = Skills;

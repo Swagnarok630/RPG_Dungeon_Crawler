@@ -2,21 +2,21 @@
     {
         "skill_name": "Attack",
         "description": "A basic attack equal to the character's strength",
-        "cost": 0
+        "mpcost": 0
     },
     {
         "skill_name": "Double Swing",
         "description": "An attack that deals damage equal to 2.5x the Warrior's strength",
-        "cost": 8
+        "mpcost": 8
     },
     {
         "skill_name": "Fireball",
         "description": "A spell that deals damage equal to 3x the Mage's strength",
-        "cost": 5
+        "mpcost": 5
     },
     {
         "skill_name": "Cure",
         "description": "A spell that heals the hit points of the Cleric by 10 HP",
-        "cost": 3
+        "mpcost": 3
     }
 ]

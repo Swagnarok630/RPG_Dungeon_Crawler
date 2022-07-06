@@ -1,5 +1,6 @@
 const sequelize = require('../config/connection');
 const { Chars, Items, Skills, Users } = require('../models');
+// const exampleData = require('./exampleData.json');
 const charData = require("./charsData.json");
 const itemData = require("./itemsData.json");
 const skillData = require("./skillsData.json");
@@ -12,12 +13,13 @@ const seedDatabase = async () => {
   const chars = await Chars.bulkCreate(charData);
   const items = await Items.bulkCreate(itemData);
   const skills = await Skills.bulkCreate(skillData);
+  //TODO - create seed users?
   // const users = await Users.bulkCreate(userData);
   console.log(`seeded ${chars.length} character data`);
   console.log(`seeded ${items.length} item data`);
   console.log(`seeded ${skills.length} skill data`);
-  console.log(`seeded ${users.length} user data`);
+  // console.log(`seeded ${users.length} user data`);
   return true
 };
 
-module.export = seedDatabase
+module.exports = seedDatabase

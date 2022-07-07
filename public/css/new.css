@@ -14,10 +14,14 @@ h1 {
     color: white;
     
     
+    
   }
 
   .two-forms {
     display: flex;
     justify-content: center;
     padding: 40px;
+    width: 100vw;
   }
+
+  

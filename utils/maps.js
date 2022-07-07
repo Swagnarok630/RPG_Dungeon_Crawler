@@ -1,10 +1,10 @@
 require('dotenv').config();
 const Dungeon = require("dungeon-generator");
 const sequelize = require('../config/connection');
-const { Map, Grid } = require("../models/index");
+const { Map } = require("../models/index");
 const namor = require("namor");
-
 const itemList = ['♥', '⚔', '💩']
+const enemyList = ['🕷️', '💀', '🦀']
 const defaultSettings =
 {
     "size": [20, 15],
@@ -53,8 +53,8 @@ const genMap2 = (settings = defaultSettings) => {
     return { grids: dun.walls.rows, start: dun.start_pos, exit, char: dun.start_pos };
 }
 
-const giveMapItems = (map, count = 2) => {
-    const paths = map.map.reduce((a, row, i) => {
+const giveMapItemsAndEnemies = (map, count = 2) => {
+    const paths1 = map.map.reduce((a, row, i) => {
         row.cols.map((col, j) => {
             if (col.isPath) {
                 a.push([j, i]);
@@ -63,8 +63,20 @@ const giveMapItems = (map, count = 2) => {
         return a
     }, []);
 
-    paths.sort(() => Math.random() - 0.5);
-    const items = paths.slice(0, count);
+    const paths2 = map.map.reduce((b, row, i) => {
+        row.cols.map((col, j) => {
+            if (col.isPath) {
+                b.push([j, i]);
+            }
+        });
+        return b
+    }, []);
+
+    paths1.sort(() => Math.random() - 0.5);
+    const items = paths1.slice(0, count);
+
+    paths2.sort(() => Math.random() - 0.5);
+    const enemies = paths2.slice(0, count);
 
     //iterate through items to modify map grids;
 
@@ -74,8 +86,39 @@ const giveMapItems = (map, count = 2) => {
         }
     });
 
+    enemies.forEach(([x, y]) => {
+        map.map[y].cols[x].enemies = {
+            "icon": enemyList[~~(Math.random() * enemyList.length)]
+        }
+    });
+
     return map;
 }
+
+// const giveMapEnemies = (map, count = 3) => {
+//     const paths = map.map.reduce((a, row, i) => {
+//         row.cols.map((col, j) => {
+//             if (col.isPath) {
+//                 a.push([j, i]);
+//             }
+//         });
+//         return a
+//     }, []);
+
+//     paths.sort(() => Math.random() - 0.5);
+//     const enemies = paths.slice(0, count);
+
+//     //iterate through items to modify map grids;
+
+//     enemies.forEach(([x, y]) => {
+//         map.map[y].cols[x].enemies = {
+//             "icon": enemyList[~~(Math.random() * enemyList.length)]
+//         }
+//     });
+
+//     return map;
+// }
+
 
 const getRandomMap = async () => {
     const seeds = genMap2();
@@ -91,9 +134,7 @@ const getRandomMap = async () => {
         }))
     }
 
-
-
-    return giveMapItems(mapHydrated)
+    return giveMapItemsAndEnemies(mapHydrated)
 }
 
 module.exports = { genMapv2: genMap2, getRandomMap };

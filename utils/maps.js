@@ -2,7 +2,9 @@ require('dotenv').config();
 const Dungeon = require("dungeon-generator");
 const sequelize = require('../config/connection');
 const { Map, Grid } = require("../models/index");
-const namor = require("namor")
+const namor = require("namor");
+
+const itemList = ['♥', '⚔', '💩']
 const defaultSettings =
 {
     "size": [20, 15],
@@ -32,58 +34,66 @@ const genMap2 = (settings = defaultSettings) => {
     // console.dir(dun)
     dun.generate();
     // dun.print();
-    return dun.walls.rows
+    //find the farthest node that's solid;
+    let exit = null;
+    let dist = 0;
+    console.log(dun.walls.rows);
+    const [x, y] = dun.start_pos;
+    dun.walls.rows.forEach((r, i) => r.forEach((n, j) => {
+        if (n) return;
+        const newDist = Math.abs(i - y) + Math.abs(j - x);
+        if (newDist > dist) {
+            dist = newDist;
+            exit = [j, i];
+        }
+    }));
+
+    console.log(dun.start_pos, exit)
+
+    return { grids: dun.walls.rows, start: dun.start_pos, exit, char: dun.start_pos };
 }
 
-// create the maps first
-// async function seedMePlease() {
-//     const seeds = genMap2()
-//     let map = await Map.bulkCreate([
-//         { name: 'test1' },
-//         { name: 'test2' },
-//         { name: 'test3' }
-//     ])
-// }
+const giveMapItems = (map, count = 2) => {
+    const paths = map.map.reduce((a, row, i) => {
+        row.cols.map((col, j) => {
+            if (col.isPath) {
+                a.push([j, i]);
+            }
+        });
+        return a
+    }, []);
 
-async function seedMePlease() {
-    //associate with userid of some sort;
-    const seeds = genMap2();
-    let map = await Map.create({ name: namor.generate({ manly: true, words: 2 }).split("-").slice(0, 2).map(word => word[0].toUpperCase() + word.slice(1, word.length + 1)).join(" "), map: JSON.stringify(seeds) })
-    return map.dataValues
+    paths.sort(() => Math.random() - 0.5);
+    const items = paths.slice(0, count);
+
+    //iterate through items to modify map grids;
+
+    items.forEach(([x, y]) => {
+        map.map[y].cols[x].item = {
+            "icon": itemList[~~(Math.random() * itemList.length)]
+        }
+    });
+
+    return map;
 }
-
-
-// get a random int 1 - 100 (that is the map id)
-// await Map.findOne(id)
-// let cols = Col.where({ map_id: id })
-// for loop to get all the rows
-// let rows = Row.where({ col_id: cols[i].dataValues.id })
-// create your array of arrays of booleans
-
-// sequelize.sync({ force: false }).then(async () => {
-//     await Promise.all([...Array(10)].map((_, i) => seedMePlease()));
-//     const allMaps = await Map.findAll({ include: [{ model: Grid }] });
-//     //get random map
-//     const randoMap = allMaps[~~(Math.random() * allMaps.length)];
-//     //serialize data
-//     const mapClean = randoMap.get({ plain: true });
-
-//     const twodArray = JSON.parse(mapClean.map);
-//     console.log(twodArray)
-//     // process.exit()
-// });
 
 const getRandomMap = async () => {
-    const newMap = await seedMePlease();
-    newMap.map = JSON.parse(newMap.map).map(row => ({ cols: row }));
-    // const allMaps = await Map.findAll({ include: [{ model: Grid }] });
-    // //get random map
-    // const randoMap = allMaps[~~(Math.random() * allMaps.length)];
-    // //serialize data
-    // const mapClean = randoMap.get({ plain: true });
+    const seeds = genMap2();
+    const map = await Map.create({ name: namor.generate({ manly: true, words: 2 }).split("-").slice(0, 2).map(word => word[0].toUpperCase() + word.slice(1, word.length + 1)).join(" "), map: JSON.stringify(seeds) })
+    const mapParsed = JSON.parse(map.dataValues.map);
+    const mapHydrated = {
+        ...map.dataValues,
+        ...mapParsed,
+        map: mapParsed.grids.map((row, i) => ({
+            cols: row.map((col, j) => (
+                { isPath: !col, isStart: j === mapParsed.start[0] && i === mapParsed.start[1], isExit: j === mapParsed.exit[0] && i === mapParsed.exit[1] }
+            ))
+        }))
+    }
 
-    return newMap
+
+
+    return giveMapItems(mapHydrated)
 }
-
 
 module.exports = { genMapv2: genMap2, getRandomMap };

@@ -24,4 +24,12 @@ h1 {
     width: 100vw;
   }
 
+  .content {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    line-height: 1cm;
+  }
+
+
   

@@ -1,0 +1,35 @@
+h1 {
+    text-align: center;
+}
+
+.login-card {
+    margin: 20px;
+    flex: 0 0 20%;
+    padding: 30px;
+    border: 10px solid white;
+    border-radius: 10px;
+    border-style:double;
+    border-width: thick;
+    background-color: #070f4e;
+    color: white;
+    
+    
+    
+  }
+
+  .two-forms {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    width: 100vw;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    line-height: 1cm;
+  }
+
+
+  

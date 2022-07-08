@@ -14,9 +14,9 @@ h1 {
     border-width: thick;
     background-color: #615b41;
     color: white;
-    font-family: 'Creepster', cursive;
+    /*font-family: 'Creepster', cursive;
     font-family: 'Roboto', sans-serif;
-    font-family: 'VT323', monospace;
+    font-family: 'VT323', monospace; */
     
   }
 
@@ -33,21 +33,21 @@ h1 {
     margin: 20px;
     line-height: 1cm;
     color: white;
-    font-family: 'Creepster', cursive;
+    /*font-family: 'Creepster', cursive;
     font-family: 'Roboto', sans-serif;
     font-family: 'VT323', monospace; 
-    font-size: 32px;
+    font-size: 32px;*/
   }
 
   .nav-link {
-    font-family: 'Creepster', cursive;
+    /* font-family: 'Creepster', cursive;
     font-family: 'Roboto', sans-serif;
-    font-family: 'VT323', monospace; 
+    font-family: 'VT323', monospace; */ 
+    padding-left: 10px;
+    margin-left: 5px;
   }
 
- button {
-   color: pink;
- }
+ 
 
 
   

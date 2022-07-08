@@ -1,4 +1,4 @@
-<html lang='en'>
+
 
 <head>
   <meta charset='UTF-8' />
@@ -6,7 +6,6 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   <link rel="stylesheet" href="/css/new.css">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" type="text/css" href="/public/css/new.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,16 +13,25 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@400;500;700&family=VT323&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+{{!-- normal Bootstrap --}}
+  {{!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
     rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-    crossorigin="anonymous">
+    crossorigin="anonymous"> --}}
+{{!-- normal Bootstrap --}}
+
+{{!-- sketchy bootstrap theme --}}
+{{!-- <link rel="stylesheet" href="/css/bootstrap-sketch.min.css"> --}}
+{{!-- sketchy bootstrap theme --}}
+{{!-- RETRO bootstrap theme --}}
+<link rel="stylesheet" href="/css/bootstrap-retro.min.css">
+{{!-- RETRO bootstrap theme --}}
   <title>DUNGEON CRAWLER MAZE</title>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse bg-light" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -39,12 +47,14 @@
     </div>
   </nav>
   {{! this is the main html file wrapper for all your views }}
-  <h1>DUNGEON CRAWLER</h1>
+  <h1 class="text-light">DUNGEON CRAWLER</h1>
+  <div class="my-4">
 
-  {{! placeholder for where the view will be injected }}
-  {{{body}}}
+    {{! placeholder for where the view will be injected }}
+    {{{body}}}
+  </div>
 
-  <footer class="fixed-bottom text-center">Made by Darryl, Jasmine, Denise & Ghazaleh</footer>
+  <footer class="text-light fixed-bottom text-center">Made by Darryl, Jasmine, Denise & Ghazaleh</footer>
   {{! placeholder for where the view will be injected }}
 </body>
 <script src='/js/login.js'></script>

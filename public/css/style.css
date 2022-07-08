@@ -1,5 +1,8 @@
 body {
   background-color: #056605;
+  font-family: 'Oswald', sans-serif;;
+  background-image: url("../images/Screen\ Shot\ 2022-07-07\ at\ 9.58.53\ PM.png");
+  
 }
 
 header, .project:not(:last-child) {

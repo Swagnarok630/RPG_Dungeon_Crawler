@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Skills extends Model { }
+class UserChar extends Model { }
 
-Skills.init(
+UserChar.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,7 +11,7 @@ Skills.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        skill_name: {
+        job_class: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -19,23 +19,30 @@ Skills.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        mpcost: {
+        hitpoints: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        }
-        // TODO: Create/Search for skill icon images to use. Maybe a sword/staff for attack, a slash for double attack, a fireball for fireball, and healing star for cure
-        // filename: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        // }
+        },
+        manapoints: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        strength: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        filename: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'skill',
+        modelName: 'user_character',
     }
 );
 
-module.exports = Skills;
+module.exports = UserChar;

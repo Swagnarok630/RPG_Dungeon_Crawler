@@ -1,9 +1,9 @@
 const sequelize = require('../config/connection');
-const { Chars, Items, Skills, Users } = require('../models');
-// const exampleData = require('./exampleData.json');
+const { Chars, Items, Skills, Enemies } = require('../models');
 const charData = require("./charsData.json");
 const itemData = require("./itemsData.json");
 const skillData = require("./skillsData.json");
+const enemyData = require("./enemiesData.json");
 
 // force: true will drop the table if it already exists
 //npm run seed will execute this file, which will seed the database with the example data
@@ -13,13 +13,13 @@ const seedDatabase = async () => {
   const chars = await Chars.bulkCreate(charData);
   const items = await Items.bulkCreate(itemData);
   const skills = await Skills.bulkCreate(skillData);
-  //TODO - create seed users?
-  // const users = await Users.bulkCreate(userData);
+  const enemies = await Enemies.bulkCreate(enemyData);
   console.log(`seeded ${chars.length} character data`);
   console.log(`seeded ${items.length} item data`);
   console.log(`seeded ${skills.length} skill data`);
-  // console.log(`seeded ${users.length} user data`);
-  return true
-};
+  console.log(`seeded ${enemies.length} skill data`);
 
-module.exports = seedDatabase
+  process.exit(0)
+};
+module.exports = seedDatabase;
+// seedDatabase();

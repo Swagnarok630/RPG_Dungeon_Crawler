@@ -30,7 +30,7 @@ Items.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'items',
+        modelName: 'item',
     }
 );
 

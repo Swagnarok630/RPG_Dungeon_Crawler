@@ -1,0 +1,20 @@
+[
+    {
+      "name": "Spider",
+      "description": "A mighty and sturdy class with high raw strength and hit points",
+      "hitpoints": 18,
+      "strength": 4
+    },
+    {
+      "name": "Snake",
+      "description": "A sorcerer of the dark arts with high mana points for spell casting",
+      "hitpoints": 20,
+      "strength": 3
+    },
+    {
+      "name": "Bat",
+      "description": "A devout lacking pure strength but can heal themselves to endure hardship",
+      "hitpoints": 12,
+      "strength": 2
+    }
+]

@@ -31,11 +31,10 @@ Chars.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        // TODO: Create/Search for character images to use. Maybe fighter for warrior, black mage for mage, and white mage for cleric
-        // filename: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        // }
+        filename: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
     },
     {
         sequelize,

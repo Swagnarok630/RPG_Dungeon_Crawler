@@ -1,5 +1,5 @@
-const sequelize = require('../config/connection');
 const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class Map extends Model { }
 
@@ -11,16 +11,21 @@ Map.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        //name this column whatever you want
         name: {
-            //this is the type of data that will be stored in this column
             type: DataTypes.STRING,
-            //each time a row of data is inserted, this column will need to have a value
             allowNull: false,
         },
         map: {
             type: DataTypes.TEXT,
             allowNull: false
+        },
+        char_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: "user_character",
+                key: "id",
+            }
         }
     },
     {

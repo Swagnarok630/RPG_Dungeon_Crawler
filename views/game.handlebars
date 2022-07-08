@@ -1,13 +1,27 @@
 {{!-- Need to adjust size of the map to fit the browser better --}}
 
 <style>
+    .hud {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin: 20px;
+    }
+    .map {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+    }
     .row {
         display: flex;
     }
+
     .square {
-        height: 10px;
-        width: 10px;
+        height: 40px;
+        width: 40px;
         border: solid 2px black;
+        padding: 0px;
     }
 
     .square.solid {
@@ -15,14 +29,48 @@
     }
 </style>
 <h1>NAME OF YOUR MAP --- {{name}}</h1>
+<section class="hud">
+{{> stats}}
+<main class="map">
+
+<div class="game-map">
 {{#each map}}
 <div class="row">
     {{#each cols as |col|}}
-        {{#if col}}
-            <span class="square solid"></span>
-        {{else}}
-            <span class="square"></span>
+    {{#if col.isPath}}
+    <span class="square">
+        {{#if col.isStart}}
+        <img src="/images/Mage_S.png">
         {{/if}}
+        {{#if col.isExit}}
+        <img src="/images/Portal.png">
+        {{/if}}
+        {{#if col.item}}
+        <img src="/images/{{col.item.name}}">
+        {{/if}}
+        {{#if col.enemies}}
+        <img src="/images/{{col.enemies.name}}">
+        {{/if}}
+    </span>
+    {{else}}
+    <span class="square solid"></span>
+    {{/if}}
     {{/each}}
 </div>
 {{/each}}
+</div>
+</main>
+
+{{> controls}}
+
+</section>
+
+{{> text}}
+
+<script>
+    let gameData;
+    const gimmeData = async () => {
+        //get data of map via api route, so youcan manipulate on FE
+        //fetch()
+    }
+</script>

@@ -3,8 +3,8 @@ const Dungeon = require("dungeon-generator");
 const sequelize = require('../config/connection');
 const { Map } = require("../models/index");
 const namor = require("namor");
-const itemList = ['♥', '⚔', '💩']
-const enemyList = ['🕷️', '💀', '🦀']
+const itemList = [{ icon: '♥', name: 'Health_Potion_S.png' }, { icon: '⚔', name: "Mana_Potion_S.png" }, { icon: '💩', name: "Double_Potion_S.png" }]
+const enemyList = [{ icon: '🕷️', name: 'Spider_S.png', icon: '💀', name: 'Snake_S.png', icon: '🦀', name: 'Bat_S.png'}]
 const defaultSettings =
 {
     "size": [20, 15],
@@ -80,60 +80,46 @@ const giveMapItemsAndEnemies = (map, count = 2) => {
 
     //iterate through items to modify map grids;
 
+    map.items = [];
+    map.enemies = []
+
     items.forEach(([x, y]) => {
-        map.map[y].cols[x].item = {
-            "icon": itemList[~~(Math.random() * itemList.length)]
+        const item = {
+            ...itemList[~~(Math.random() * itemList.length)],
+            coords: [x, y]
         }
+        map.map[y].cols[x].item = item;
+        map.items.push(item)
     });
 
     enemies.forEach(([x, y]) => {
-        map.map[y].cols[x].enemies = {
-            "icon": enemyList[~~(Math.random() * enemyList.length)]
+        const enemy = {
+            ...enemyList[~~(Math.random() * enemyList.length)],
+            coords: [x, y]
         }
+        map.map[y].cols[x].enemies = enemy;
+        map.enemies.push(enemy)
     });
 
     return map;
 }
 
-// const giveMapEnemies = (map, count = 3) => {
-//     const paths = map.map.reduce((a, row, i) => {
-//         row.cols.map((col, j) => {
-//             if (col.isPath) {
-//                 a.push([j, i]);
-//             }
-//         });
-//         return a
-//     }, []);
 
-//     paths.sort(() => Math.random() - 0.5);
-//     const enemies = paths.slice(0, count);
+const getRandomMap = () => {
+    const mapSeed = genMap2();
+    const name = namor.generate({ manly: true, words: 2 }).split("-").slice(0, 2).map(word => word[0].toUpperCase() + word.slice(1, word.length + 1)).join(" ");
 
-//     //iterate through items to modify map grids;
-
-//     enemies.forEach(([x, y]) => {
-//         map.map[y].cols[x].enemies = {
-//             "icon": enemyList[~~(Math.random() * enemyList.length)]
-//         }
-//     });
-
-//     return map;
-// }
-
-
-const getRandomMap = async () => {
-    const seeds = genMap2();
-    const map = await Map.create({ name: namor.generate({ manly: true, words: 2 }).split("-").slice(0, 2).map(word => word[0].toUpperCase() + word.slice(1, word.length + 1)).join(" "), map: JSON.stringify(seeds) })
-    const mapParsed = JSON.parse(map.dataValues.map);
     const mapHydrated = {
-        ...map.dataValues,
-        ...mapParsed,
-        map: mapParsed.grids.map((row, i) => ({
+        name,
+        ...mapSeed,
+        map: mapSeed.grids.map((row, i) => ({
             cols: row.map((col, j) => (
-                { isPath: !col, isStart: j === mapParsed.start[0] && i === mapParsed.start[1], isExit: j === mapParsed.exit[0] && i === mapParsed.exit[1] }
+                { isPath: !col, isStart: j === mapSeed.start[0] && i === mapSeed.start[1], isExit: j === mapSeed.exit[0] && i === mapSeed.exit[1] }
             ))
         }))
     }
-
+    const mappy = giveMapItemsAndEnemies(mapHydrated);
+    console.log("finished", mappy)
     return giveMapItemsAndEnemies(mapHydrated)
 }
 

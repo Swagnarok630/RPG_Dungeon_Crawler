@@ -3,14 +3,23 @@ const Enemies = require('./Enemies')
 const Items = require('./Items')
 const Map = require("./Map");
 const Skills = require('./Skills')
-const Users = require('./Users')
+const Users = require('./Users');
+const UserChar = require("./UserCharacter")
 
-Chars.hasOne(Map, {
-    foreignKey: "map_id",
+Users.belongsToMany(Chars, {
+    through:UserChar
 })
 
-Map.belongsTo(Chars, {
-    foreignKey: "map_id",
+Chars.belongsToMany(Users, {
+    through: UserChar
+})
+
+UserChar.hasOne(Map, {
+    foreignKey: "char_id",
+})
+
+Map.belongsTo(UserChar, {
+    foreignKey: "char_id",
 })
 
 Chars.hasMany(Skills, {
@@ -21,29 +30,22 @@ Skills.belongsTo(Chars, {
     foreignKey: "char_id"
 })
 
-Map.hasMany(Items, {
-    foreignKey: "map_id",
+Map.belongsToMany(Items, {
+    through: "map_items"
 })
 
-Items.belongsTo(Map, {
-    foreignKey: "map_id",
+Items.belongsToMany(Map, {
+    through: "map_items"
 })
 
-Map.hasMany(Enemies, {
-    foreignKey: "map_id"
+Map.belongsToMany(Enemies, {
+    through: "map_enemy"
 })
 
-Enemies.belongsTo(Map, {
-    foreignKey: "map_id",
+Enemies.belongsToMany(Map, {
+    through: "map_enemy"
 })
 
-Users.hasMany(Chars, {
-    foreignKey: "char_id",
-})
-
-Chars.belongsTo(Users, {
-    foreignKey: "char_id",
-})
 
 
 module.exports = { Chars, Enemies, Items, Map, Skills, Users };

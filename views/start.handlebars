@@ -2,3 +2,64 @@
     (hopefully saved with session id and such). If they continue, they will select from a save file. 
     If they play a new game, they will select a new char. Once either of those selections are made, 
     we route to the game view --}}
+<style>
+    .select {
+        text-align: center;
+    }
+
+    .start-container {
+        display: flex;
+        flex-flow: column;
+        align-content: flex-start;
+        align-items: center;
+    }
+
+    .job-class-row {
+        display: flex;
+        flex-flow: row;
+    }
+
+    .card {
+        margin: 50px;
+        flex: 0 1 300px;
+    }
+
+    .job-name {
+        text-align: center;
+    }
+</style>
+    <div class="select">
+    <h3>Select Your Job Class</h3>
+    </div>
+
+<section class="start-container">
+
+    <section class="job-class-row">
+        {{#each char}}
+        <section class="card">
+            <button class="{{job_class}}"><img src="/images/{{filename}}" alt="{{description}}"></button>
+            <div class="job-name"><h4>{{job_class}}</h4></div>
+        </section>
+        {{/each}}
+    </section>
+</section>
+
+
+<script>
+    document.querySelector(".Warrior").addEventListener("click", jobWarSelected)
+    document.querySelector(".Mage").addEventListener("click", jobMagSelected)
+    document.querySelector(".Cleric").addEventListener("click", jobCleSelected)
+
+    function jobWarSelected() {
+    }
+
+    function jobMagSelected() {
+
+    }
+
+    function jobCleSelected() {
+        
+    }
+    //TODO - When chose class, hit an api route(you need to create) to create user-character
+    //get new char id, reroute to the game route /game/?usercharid =25
+</script>

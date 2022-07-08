@@ -1,21 +1,21 @@
 [
     {
-        "name": "Darryl",
+        "username": "Darryl",
         "email": "dle@gmail.com",
         "password": "123456789"
     },
     {
-        "name": "Jasmine",
+        "username": "Jasmine",
         "email": "jtsao@yahoo.com",
         "password": "987654321"
     },
     {
-        "name": "Ghazaleh",
+        "username": "Ghazaleh",
         "email": "gjavadi@hotmail.com",
         "password": "abcdefghi"
     },
     {
-        "name": "Denise",
+        "username": "Denise",
         "email": "dalvarez@outlook.com",
         "password": "abc123def"
     }

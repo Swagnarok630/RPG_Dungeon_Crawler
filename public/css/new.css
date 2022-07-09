@@ -1,5 +1,7 @@
 h1 {
     text-align: center;
+    color: white;
+    
 }
 
 .login-card {
@@ -10,10 +12,11 @@ h1 {
     border-radius: 10px;
     border-style:double;
     border-width: thick;
-    background-color: #070f4e;
+    background-color: #615b41;
     color: white;
-    
-    
+    /*font-family: 'Creepster', cursive;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'VT323', monospace; */
     
   }
 
@@ -24,12 +27,27 @@ h1 {
     width: 100vw;
   }
 
-  .content {
+  .content, h1 {
     display: flex;
     justify-content: center;
     margin: 20px;
     line-height: 1cm;
+    color: white;
+    /*font-family: 'Creepster', cursive;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'VT323', monospace; 
+    font-size: 32px;*/
   }
+
+  .nav-link {
+    /* font-family: 'Creepster', cursive;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'VT323', monospace; */ 
+    padding-left: 10px;
+    margin-left: 5px;
+  }
+
+ 
 
 
   

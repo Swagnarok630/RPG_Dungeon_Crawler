@@ -19,7 +19,6 @@ const seedDatabase = async () => {
   // console.log(`seeded ${skills.length} skill data`);
   console.log(`seeded ${enemies.length} skill data`);
 
-  process.exit(0)
 };
 module.exports = seedDatabase;
 // seedDatabase();

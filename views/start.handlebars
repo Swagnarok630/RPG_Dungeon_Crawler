@@ -27,9 +27,35 @@
     .job-name {
         text-align: center;
     }
+
+    .saved-char-container {
+        margin: 20px 10%;
+        border: inset 6px grey;
+    }
+    
+    .saved-chars {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        max-height: 600px;
+        overflow-y: scroll;
+    }
 </style>
+
+<section class="saved-char-container">
+<h1>Continue Your Adventure</h1>
+    <section class="job-class-row saved-chars">
+        {{#each userChars}}
+        <section class="card">
+            <button class="char-btn" value="{{id}}"><img src="/images/{{filename}}" alt="{{description}}"></button>
+            <div class="job-name"><h4>{{job_class}}</h4></div>
+        </section>
+        {{/each}}
+    </section>
+</section>
+
+
     <div class="select">
-    <h3>Select Your Job Class</h3>
+    <h3>NEW GAME - Select Your Job Class</h3>
     </div>
 
 <section class="start-container">
@@ -37,7 +63,7 @@
     <section class="job-class-row">
         {{#each char}}
         <section class="card">
-            <button class="{{job_class}}"><img src="/images/{{filename}}" alt="{{description}}"></button>
+            <button class="job-btn" value="{{job_class}}"><img src="/images/{{filename}}" alt="{{description}}"></button>
             <div class="job-name"><h4>{{job_class}}</h4></div>
         </section>
         {{/each}}
@@ -46,20 +72,31 @@
 
 
 <script>
-    document.querySelector(".Warrior").addEventListener("click", jobWarSelected)
-    document.querySelector(".Mage").addEventListener("click", jobMagSelected)
-    document.querySelector(".Cleric").addEventListener("click", jobCleSelected)
+    document.querySelectorAll(".job-btn").forEach(btn => btn.addEventListener("click", jobSelected))
+    document.querySelectorAll(".char-btn").forEach(btn => btn.addEventListener("click", (e)=> {
+        redir(e.currentTarget.value)
+    }))
 
-    function jobWarSelected() {
+   async function jobSelected(e) {
+        console.log(e.currentTarget.value)
+        const choice = await fetch('/api/game/new-char', {
+            method: 'POST',
+            body: JSON.stringify({ value: e.currentTarget.value }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+        const data = await choice.json();
+        console.log("RES FROM SERVER", data)
+
+       redir(data.id)
     }
 
-    function jobMagSelected() {
-
+    function redir(id){
+        document.location.replace(`/game/${id}`);
     }
 
-    function jobCleSelected() {
-        
-    }
+    // Should this be userchar? since that's the table i'm hitting? 
+    // Am i suppose to hit find userchar value with data.id? and have that redirect there?
+
     //TODO - When chose class, hit an api route(you need to create) to create user-character
     //get new char id, reroute to the game route /game/?usercharid =25
 </script>

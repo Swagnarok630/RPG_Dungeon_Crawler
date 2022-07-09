@@ -13,7 +13,7 @@ h1 {
     border-style:double;
     border-width: thick;
     background-color: #615b41;
-    color: white;
+    color: black;
     /*font-family: 'Creepster', cursive;
     font-family: 'Roboto', sans-serif;
     font-family: 'VT323', monospace; */
@@ -46,6 +46,8 @@ h1 {
     padding-left: 10px;
     margin-left: 5px;
   }
+
+
 
  
 

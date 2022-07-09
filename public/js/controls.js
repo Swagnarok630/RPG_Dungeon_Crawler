@@ -14,10 +14,9 @@ async function getMeData(){
 
 getMeData()
 
-async function uploadData() {
+async function uploadData(start) {
     const dataToSave = gameData
     const userCharId = dataToSave.character.id
-    const start = dataToSave.map.start
     // const id = dataToSave.map.id
     // const name = dataToSave.map.name
     // const map = dataToSave.map.map
@@ -25,18 +24,19 @@ async function uploadData() {
     console.log ("THIS IS dataToSave -- ", dataToSave)
     const res = await fetch(`/api/game/gamedata/${userCharId}`, {
         method: "PUT",
-        body: JSON.stringify({ userCharId, start }),
+        body: JSON.stringify({ userCharId, start, newCoord:dataToSave.map.newCoord }),
         headers: { 'Content-Type': 'application/json' },
     });
     const newData = await res.json();
     console.log("NEWDATA", newData)
-    // gameData = data
+    location.reload()
+    exited()
 }
 
 const moveUp = async () => {
-    console.log(gameData)
     //need to check if y-1, x is a path
-
+    const start0 = gameData.map.start[0];
+    const start1 = gameData.map.start[1];
     //if path, move to it, check if item or enemy
     //item or enemy logic here if applies
 
@@ -44,10 +44,11 @@ const moveUp = async () => {
     let newCoord = gameData.map.start;
     if(gameData.map.map[newCoord[1] - 1].cols[newCoord[0]].isPath === true) {
         newCoord[1] = newCoord[1] - 1;
-        gameData.map.start = newCoord
+        gameData.map.newCoord = newCoord
         console.log("moved -- ", gameData.map.start)
         console.log("extra data -- ", gameData)
-        // uploadData()
+        uploadData([start0, start1])
+
     }else{
         console.log("unmoved -- ", gameData.map.start)
     }
@@ -100,13 +101,17 @@ const moveUp = async () => {
 
 const moveLeft = async () => {
     console.log(gameData)
+    const start0 = gameData.map.start[0];
+    const start1 = gameData.map.start[1];
+
+    //else just change locationlet newCoord = gameData.map.start;
     let newCoord = gameData.map.start;
     if(gameData.map.map[newCoord[1]].cols[newCoord[0] - 1].isPath === true) {
         newCoord[0] = newCoord[0] - 1;
-        gameData.map.start = newCoord
+        gameData.map.newCoord = newCoord
         console.log("moved -- ", gameData.map.start)
         console.log("extra data -- ", gameData)
-        // uploadData()
+        uploadData([start0,start1])
     }else{
         console.log("unmoved -- ", gameData.map.start)
     }
@@ -114,13 +119,15 @@ const moveLeft = async () => {
 
 const moveRight = async () => {
     console.log(gameData)
+    const start0 = gameData.map.start[0];
+    const start1 = gameData.map.start[1];
     let newCoord = gameData.map.start;
     if(gameData.map.map[newCoord[1]].cols[newCoord[0] + 1].isPath === true) {
         newCoord[0] = newCoord[0] + 1;
-        gameData.map.start = newCoord
+        gameData.map.newCoord = newCoord
         console.log("moved -- ", gameData.map.start)
         console.log("extra data -- ", gameData)
-        // uploadData()
+        uploadData([start0, start1])
     }else{
         console.log("unmoved -- ", gameData.map.start)
     }
@@ -128,19 +135,37 @@ const moveRight = async () => {
 
 const moveDown = async () => {
     console.log(gameData)
+    const start0 = gameData.map.start[0];
+    const start1 = gameData.map.start[1];
     let newCoord = gameData.map.start;
     if(gameData.map.map[newCoord[1] + 1].cols[newCoord[0]].isPath === true) {
         newCoord[1] = newCoord[1] + 1;
-        gameData.map.start = newCoord
+        gameData.map.newCoord = newCoord
         console.log("moved -- ", gameData.map.start)
         console.log("extra data -- ", gameData)
-        // uploadData()
+        uploadData([start0, start1])
     }else{
         console.log("unmoved -- ", gameData.map.start)
     }
 }
 
-
+const exited = async () => {
+    if (start === gameData.map.exit) {
+        typemodal.style.display = "block";
+            // Allows user to click on X button to close modal
+            typespan.onclick = function() {
+                typemodal.style.display = "none";
+            }
+            // Allows user to click anywhere outside the modal window to close modal
+            window.onclick = function(event) {
+                if (event.target == typemodal) {
+                    typemodal.style.display = "none";
+                }
+            }
+            document.location.replace('/start');
+    }
+    
+}
 
 
 // const skill1 = async () => {

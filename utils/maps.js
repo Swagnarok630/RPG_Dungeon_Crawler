@@ -3,8 +3,8 @@ const Dungeon = require("dungeon-generator");
 const sequelize = require('../config/connection');
 const { Map } = require("../models/index");
 const namor = require("namor");
-const itemList = [{ icon: '♥', name: 'Health_Potion_S.png' }, { icon: '⚔', name: "Mana_Potion_S.png" }, { icon: '💩', name: "Double_Potion_S.png" }]
-const enemyList = [{ icon: '🕷️', name: 'Spider_S.png', icon: '💀', name: 'Snake_S.png', icon: '🦀', name: 'Bat_S.png'}]
+const itemList = [{ name: 'Health', file: 'Health_Potion_S.png' }, { name: 'Mana', file: "Mana_Potion_S.png" }, { name: 'Double', file: "Double_Potion_S.png" }]
+const enemyList = [{ name: 'Spider', file: 'Spider_S.png', name: 'Snake', file: 'Snake_S.png', name: 'Bat', file: 'Bat_S.png'}]
 const defaultSettings =
 {
     "size": [20, 15],
@@ -101,6 +101,8 @@ const giveMapItemsAndEnemies = (map, count = 2) => {
         map.enemies.push(enemy)
     });
 
+    console.log(map.items,map.enemies)
+
     return map;
 }
 
@@ -118,8 +120,6 @@ const getRandomMap = () => {
             ))
         }))
     }
-    const mappy = giveMapItemsAndEnemies(mapHydrated);
-    console.log("finished", mappy)
     return giveMapItemsAndEnemies(mapHydrated)
 }
 

@@ -6,13 +6,19 @@ const Skills = require('./Skills')
 const Users = require('./Users');
 const UserChar = require("./UserCharacter")
 
-Users.belongsToMany(Chars, {
-    through:UserChar
-})
+// Users.belongsToMany(Chars, {
+//     through:UserChar, 
+//     foreignKey: {
+//         name: "user_id"
+//     }
+// })
 
-Chars.belongsToMany(Users, {
-    through: UserChar
-})
+// Chars.belongsToMany(Users, {
+//     through: UserChar,
+//     foreignKey: {
+//         name: "char_id"
+//     }
+// })
 
 UserChar.hasOne(Map, {
     foreignKey: "char_id",
@@ -48,4 +54,4 @@ Enemies.belongsToMany(Map, {
 
 
 
-module.exports = { Chars, Enemies, Items, Map, Skills, Users };
+module.exports = { Chars, Enemies, Items, Map, Skills, Users, UserChar };

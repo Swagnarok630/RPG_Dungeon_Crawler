@@ -35,6 +35,20 @@ UserChar.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        user_id: {
+            type: DataTypes.INTEGER,
+            unique:false,
+            references: {
+                model: "user"
+            }
+        },
+        char_id: {
+            type: DataTypes.INTEGER,
+            unique: false,
+            references: {
+                model: "char"
+            }
+        },
     },
     {
         sequelize,

@@ -28,13 +28,13 @@ Map.belongsTo(UserChar, {
     foreignKey: "char_id",
 })
 
-Chars.hasMany(Skills, {
-    foreignKey: "char_id",
-})
+// Chars.hasMany(Skills, {
+//     foreignKey: "char_id",
+// })
 
-Skills.belongsTo(Chars, {
-    foreignKey: "char_id"
-})
+// Skills.belongsTo(Chars, {
+//     foreignKey: "char_id"
+// })
 
 // Map.belongsToMany(Items, {
 //     through: "map_items"

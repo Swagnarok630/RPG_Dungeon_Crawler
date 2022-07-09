@@ -34,3 +34,37 @@ header, .project:not(:last-child) {
   h1 {
     color: white;
   }
+
+.main-description {
+  display: flex;
+  max-width: fit-content;
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  height: 300px;
+  width: 1300px;
+
+}
+
+.rules-of-the-game {
+  padding-top: 30px;
+  padding-right: 40px;
+  top: 75%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  height: 190px;
+  width: 1250px;
+  display: flex;
+  max-width: fit-content;
+  background-color: black;
+  color: red;
+  border-radius: 30px;
+  position: absolute;
+
+}

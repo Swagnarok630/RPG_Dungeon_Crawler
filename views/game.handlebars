@@ -1,4 +1,3 @@
-{{!-- Need to adjust size of the map to fit the browser better --}}
 
 <style>
     .hud {
@@ -6,6 +5,7 @@
         flex-direction: row;
         width: 100%;
         margin: 20px;
+        justify-content: space-around;
     }
     .map {
         display: flex;
@@ -22,34 +22,65 @@
         width: 40px;
         border: solid 2px black;
         padding: 0px;
+        background-image: url("/images/path.png");
     }
 
     .square.solid {
-        background: red;
+        background-image: url("/images/walls.png");
     }
+
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+    .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
 </style>
-<h1>NAME OF YOUR MAP --- {{name}}</h1>
+<h1>MAP --- {{map.name}}</h1>
+
+<div class="modal">
+    <div class="modal-content">
+        <span class="win">&times;</span>
+        <p>VICTORY!!!</p>
+    </div>
+</div>
+
 <section class="hud">
 {{> stats}}
 <main class="map">
 
 <div class="game-map">
-{{#each map}}
+{{#each map.map}}
 <div class="row">
     {{#each cols as |col|}}
     {{#if col.isPath}}
     <span class="square">
         {{#if col.isStart}}
-        <img src="/images/Mage_S.png">
+        <img src="/images/Player_Icon.png">
         {{/if}}
         {{#if col.isExit}}
         <img src="/images/Portal.png">
         {{/if}}
         {{#if col.item}}
-        <img src="/images/{{col.item.name}}">
+        <img src="/images/{{col.item.file}}">
         {{/if}}
         {{#if col.enemies}}
-        <img src="/images/{{col.enemies.name}}">
+        <img src="/images/{{col.enemies.file}}">
         {{/if}}
     </span>
     {{else}}
@@ -65,12 +96,8 @@
 
 </section>
 
-{{> text}}
 
-<script>
-    let gameData;
-    const gimmeData = async () => {
-        //get data of map via api route, so youcan manipulate on FE
-        //fetch()
-    }
-</script>
+
+{{!-- {{> text}} --}}
+
+<script src="/js/controls"></script>

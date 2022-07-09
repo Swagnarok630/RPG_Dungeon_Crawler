@@ -1,8 +1,8 @@
 const Chars = require('./Chars')
 const Enemies = require('./Enemies')
-const Items = require('./Items')
+// const Items = require('./Items')
 const Map = require("./Map");
-const Skills = require('./Skills')
+// const Skills = require('./Skills')
 const Users = require('./Users');
 const UserChar = require("./UserCharacter")
 
@@ -36,13 +36,13 @@ Skills.belongsTo(Chars, {
     foreignKey: "char_id"
 })
 
-Map.belongsToMany(Items, {
-    through: "map_items"
-})
+// Map.belongsToMany(Items, {
+//     through: "map_items"
+// })
 
-Items.belongsToMany(Map, {
-    through: "map_items"
-})
+// Items.belongsToMany(Map, {
+//     through: "map_items"
+// })
 
 Map.belongsToMany(Enemies, {
     through: "map_enemy"
@@ -54,4 +54,4 @@ Enemies.belongsToMany(Map, {
 
 
 
-module.exports = { Chars, Enemies, Items, Map, Skills, Users, UserChar };
+module.exports = { Chars, Enemies,  Map,  Users, UserChar };

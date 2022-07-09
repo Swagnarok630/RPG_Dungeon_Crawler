@@ -1,8 +1,9 @@
 body {
-  background-color: #056605;
-  font-family: 'Oswald', sans-serif;;
+
+  /*font-family: 'Creepster', cursive;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'VT323', monospace; */
   background-image: url("../images/Screen\ Shot\ 2022-07-07\ at\ 9.58.53\ PM.png");
-  
 }
 
 header, .project:not(:last-child) {
@@ -28,4 +29,8 @@ header, .project:not(:last-child) {
     color: #056605;
     font-weight: bold;
     margin-left: -5px;
+  }
+
+  h1 {
+    color: white;
   }
